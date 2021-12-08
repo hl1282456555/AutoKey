@@ -1,0 +1,8 @@
+{
+	"controlKey": "F1",
+	"loop": false,
+	"commandList": [
+		{ "key": "1", "waitTime": 1000 },
+		{ "key": "2", "waitTime": 1000 }
+	]
+}
