@@ -92,7 +92,7 @@ int main()
        }
 
         if (!bStartProcess) {
-			Sleep(1000);
+			Sleep(100);
 			NextCommandIndex = 0;
             continue;
         }
