@@ -11,7 +11,14 @@
 
 int main()
 {
-    std::cout << "Welcome auto key!" << std::endl;
+    std::cout << "Welcome to AutoKey!" << std::endl;
+    HWND FFXIVWindow = FindWindowEx(NULL, NULL, NULL, L"×îÖÕ»ÃÏëXIV");
+    if (FFXIVWindow == NULL) {
+        std::cout << "Failed to find FFXIV window." << std::endl;
+        return -1;
+    }
+
+    std::cout << "Found FFXIV window." << std::endl;
     std::cout << "Loading the config file." << std::endl;
 
     using Json = nlohmann::json;
@@ -92,8 +99,9 @@ int main()
 
         const FCommandInfo Command = Commands[NextCommandIndex];
 
-        keybd_event(Command.KeyCode, MapVirtualKey(Command.KeyCode, MAPVK_VK_TO_VSC), KEYEVENTF_EXTENDEDKEY | 0, 0);
-        keybd_event(Command.KeyCode, MapVirtualKey(Command.KeyCode, MAPVK_VK_TO_VSC), KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+        PostMessage(FFXIVWindow, WM_KEYDOWN, Command.KeyCode, 0);
+        Sleep(100);
+        PostMessage(FFXIVWindow, WM_KEYUP, Command.KeyCode, 0);
 
         Sleep(Command.WaitTime);
 
